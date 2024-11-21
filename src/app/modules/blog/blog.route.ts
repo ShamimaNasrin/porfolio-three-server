@@ -1,12 +1,14 @@
 import express from "express";
 import validateRequest from "../../middlewares/validateRequest";
+import { blogValidationSchema } from "./blog.zod.validation";
+import { BlogControllers } from "./blog.controller";
 
 const router = express.Router();
 
 // for creating Blog
 router.post(
   "/",
-  validateRequest(BlogValidationSchema),
+  validateRequest(blogValidationSchema),
   BlogControllers.createBlog
 );
 
@@ -14,12 +16,12 @@ router.post(
 router.get("/", BlogControllers.getAllBlogs);
 
 // get a single Blog
-router.get("/:experienceId", BlogControllers.getSingleBlog);
+router.get("/:blogId", BlogControllers.getSingleBlog);
 
 //delete a single Blog
-router.delete("/:experienceId", BlogControllers.deleteSingleBlog);
+router.delete("/:blogId", BlogControllers.deleteSingleBlog);
 
 // update a single Blog
-router.put("/:experienceId", BlogControllers.updateSingleBlog);
+router.put("/:blogId", BlogControllers.updateSingleBlog);
 
 export const BlogRoutes = router;

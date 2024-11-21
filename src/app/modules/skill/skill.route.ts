@@ -1,12 +1,14 @@
 import express from "express";
 import validateRequest from "../../middlewares/validateRequest";
+import { skillValidationSchema } from "./skill.zod.validation";
+import { SkillControllers } from "./skill.controller";
 
 const router = express.Router();
 
 // for creating Skill
 router.post(
   "/",
-  validateRequest(SkillValidationSchema),
+  validateRequest(skillValidationSchema),
   SkillControllers.createSkill
 );
 
@@ -14,12 +16,12 @@ router.post(
 router.get("/", SkillControllers.getAllSkills);
 
 // get a single Skill
-// router.get("/:experienceId", SkillControllers.getSingleSkill);
+// router.get("/:skillId", SkillControllers.getSingleSkill);
 
 //delete a single Skill
-router.delete("/:experienceId", SkillControllers.deleteSingleSkill);
+router.delete("/:skillId", SkillControllers.deleteSingleSkill);
 
 // update a single Skill
-// router.put("/:experienceId", SkillControllers.updateSingleSkill);
+// router.put("/:skillId", SkillControllers.updateSingleSkill);
 
 export const SkillRoutes = router;

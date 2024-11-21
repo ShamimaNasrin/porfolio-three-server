@@ -1,12 +1,14 @@
 import express from "express";
 import validateRequest from "../../middlewares/validateRequest";
+import { projectValidationSchema } from "./project.zod.validation";
+import { ProjectControllers } from "./project.controller";
 
 const router = express.Router();
 
 // for creating Project
 router.post(
   "/",
-  validateRequest(ProjectValidationSchema),
+  validateRequest(projectValidationSchema),
   ProjectControllers.createProject
 );
 
@@ -14,11 +16,11 @@ router.post(
 router.get("/", ProjectControllers.getAllProjects);
 
 // get a single Project
-router.get("/:experienceId", ProjectControllers.getSingleProject);
+router.get("/:projectId", ProjectControllers.getSingleProject);
 
 //delete a single Project
-router.delete("/:experienceId", ProjectControllers.deleteSingleProject);
+router.delete("/:projectId", ProjectControllers.deleteSingleProject);
 
 // update a single Project
-router.put("/:experienceId", ProjectControllers.updateSingleProject);
+router.put("/:projectId", ProjectControllers.updateSingleProject);
 export const ProjectRoutes = router;
