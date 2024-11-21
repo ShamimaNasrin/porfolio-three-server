@@ -1,37 +1,36 @@
 import catchAsync from "../../utils/catchAsync";
-import httpStatus from "http-status";
 import sendResponse from "../../utils/sendResponse";
 import AppError from "../../errors/AppError";
 import { ProjectServices } from "./project.service";
 
-// create A Project
+// Create a Project
 const createProject = catchAsync(async (req, res) => {
   const result = await ProjectServices.createProject(req.body);
   // console.log(result);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: 200, // HTTP 200 OK
     success: true,
     message: "Project added successfully",
     data: result,
   });
 });
 
-// get A Project
+// Get a Single Project
 const getSingleProject = catchAsync(async (req, res) => {
   const projectId = req.params.projectId;
   const result = await ProjectServices.getSingleProject(projectId);
 
   if (!result) {
     sendResponse(res, {
-      statusCode: httpStatus.NOT_FOUND,
+      statusCode: 404, // HTTP 404 Not Found
       success: false,
       message: "No Data Found",
       data: [],
     });
   } else {
     sendResponse(res, {
-      statusCode: httpStatus.OK,
+      statusCode: 200, // HTTP 200 OK
       success: true,
       message: "Project retrieved successfully",
       data: result,
@@ -39,46 +38,46 @@ const getSingleProject = catchAsync(async (req, res) => {
   }
 });
 
-// get All Projects
+// Get All Projects
 const getAllProjects = catchAsync(async (req, res) => {
   const result = await ProjectServices.getAllProjects();
 
-  if (!result) {
+  if (!result || result.length === 0) {
     sendResponse(res, {
-      statusCode: httpStatus.NOT_FOUND,
+      statusCode: 404, // HTTP 404 Not Found
       success: false,
       message: "No Data Found",
       data: [],
     });
   } else {
     sendResponse(res, {
-      statusCode: httpStatus.OK,
+      statusCode: 200, // HTTP 200 OK
       success: true,
-      message: "Project retrieved successfully",
+      message: "Projects retrieved successfully",
       data: result,
     });
   }
 });
 
-// delete A Project
+// Delete a Single Project
 const deleteSingleProject = catchAsync(async (req, res) => {
   const projectId = req.params.projectId;
   if (!projectId) {
-    throw new AppError(httpStatus.NOT_FOUND, "Invalid Project Id");
+    throw new AppError(404, "Invalid Project Id"); // HTTP 404 Not Found
   }
 
   const result = await ProjectServices.deleteSingleProject(projectId);
 
   if (!result) {
     sendResponse(res, {
-      statusCode: httpStatus.NOT_FOUND,
+      statusCode: 404, // HTTP 404 Not Found
       success: false,
       message: "No such Project",
       data: [],
     });
   } else {
     sendResponse(res, {
-      statusCode: httpStatus.OK,
+      statusCode: 200, // HTTP 200 OK
       success: true,
       message: "Project deleted successfully",
       data: result,
@@ -86,7 +85,7 @@ const deleteSingleProject = catchAsync(async (req, res) => {
   }
 });
 
-// update A Project
+// Update a Single Project
 const updateSingleProject = catchAsync(async (req, res) => {
   const projectId = req.params.projectId;
   const updatedProject = req.body;
@@ -98,14 +97,14 @@ const updateSingleProject = catchAsync(async (req, res) => {
 
   if (!result) {
     sendResponse(res, {
-      statusCode: httpStatus.NOT_FOUND,
+      statusCode: 404, // HTTP 404 Not Found
       success: false,
       message: "Project not found",
       data: [],
     });
   } else {
     sendResponse(res, {
-      statusCode: httpStatus.OK,
+      statusCode: 200, // HTTP 200 OK
       success: true,
       message: "Project updated successfully",
       data: result,

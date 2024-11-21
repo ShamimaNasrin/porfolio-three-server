@@ -1,5 +1,4 @@
 import catchAsync from "../../utils/catchAsync";
-import httpStatus from "http-status";
 import sendResponse from "../../utils/sendResponse";
 import AppError from "../../errors/AppError";
 import { SkillServices } from "./skill.service";
@@ -9,7 +8,7 @@ const createSkill = catchAsync(async (req, res) => {
   const result = await SkillServices.createSkill(req.body);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: 200, // HTTP 200 OK
     success: true,
     message: "Skill added successfully",
     data: result,
@@ -44,14 +43,14 @@ const getAllSkills = catchAsync(async (req, res) => {
 
   if (!result || result.length === 0) {
     sendResponse(res, {
-      statusCode: httpStatus.NOT_FOUND,
+      statusCode: 404, // HTTP 404 Not Found
       success: false,
       message: "No Data Found",
       data: [],
     });
   } else {
     sendResponse(res, {
-      statusCode: httpStatus.OK,
+      statusCode: 200, // HTTP 200 OK
       success: true,
       message: "Skills retrieved successfully",
       data: result,
@@ -63,21 +62,21 @@ const getAllSkills = catchAsync(async (req, res) => {
 const deleteSingleSkill = catchAsync(async (req, res) => {
   const skillId = req.params.skillId;
   if (!skillId) {
-    throw new AppError(httpStatus.NOT_FOUND, "Invalid Skill Id");
+    throw new AppError(404, "Invalid Skill Id"); // HTTP 404 Not Found
   }
 
   const result = await SkillServices.deleteSingleSkill(skillId);
 
   if (!result) {
     sendResponse(res, {
-      statusCode: httpStatus.NOT_FOUND,
+      statusCode: 404, // HTTP 404 Not Found
       success: false,
       message: "No such Skill",
       data: [],
     });
   } else {
     sendResponse(res, {
-      statusCode: httpStatus.OK,
+      statusCode: 200, // HTTP 200 OK
       success: true,
       message: "Skill deleted successfully",
       data: result,
