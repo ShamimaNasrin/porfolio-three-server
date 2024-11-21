@@ -3,23 +3,23 @@ import validateRequest from "../../middlewares/validateRequest";
 
 const router = express.Router();
 
-// create user
-// router.post(
-//   "/signup",
-//   validateRequest(userValidationSchema),
-//   UserControllers.signUp
-// );
+// for creating Skill
+router.post(
+  "/",
+  validateRequest(SkillValidationSchema),
+  SkillControllers.createSkill
+);
 
-// // get all user
-// router.get("/", UserControllers.getAllUsers);
+//get all Skill
+router.get("/", SkillControllers.getAllSkills);
 
-// // update user
-// router.patch(
-//   "/:userId",
-//   // authUser,
-//   // authAdmin,
+// get a single Skill
+// router.get("/:experienceId", SkillControllers.getSingleSkill);
 
-//   UserControllers.updateUserRole
-// );
+//delete a single Skill
+router.delete("/:experienceId", SkillControllers.deleteSingleSkill);
+
+// update a single Skill
+// router.put("/:experienceId", SkillControllers.updateSingleSkill);
 
 export const SkillRoutes = router;

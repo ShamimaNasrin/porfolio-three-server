@@ -3,23 +3,22 @@ import validateRequest from "../../middlewares/validateRequest";
 
 const router = express.Router();
 
-// create user
-// router.post(
-//   "/signup",
-//   validateRequest(userValidationSchema),
-//   UserControllers.signUp
-// );
+// for creating Project
+router.post(
+  "/",
+  validateRequest(ProjectValidationSchema),
+  ProjectControllers.createProject
+);
 
-// // get all user
-// router.get("/", UserControllers.getAllUsers);
+//get all Project
+router.get("/", ProjectControllers.getAllProjects);
 
-// // update user
-// router.patch(
-//   "/:userId",
-//   // authUser,
-//   // authAdmin,
+// get a single Project
+router.get("/:experienceId", ProjectControllers.getSingleProject);
 
-//   UserControllers.updateUserRole
-// );
+//delete a single Project
+router.delete("/:experienceId", ProjectControllers.deleteSingleProject);
 
+// update a single Project
+router.put("/:experienceId", ProjectControllers.updateSingleProject);
 export const ProjectRoutes = router;

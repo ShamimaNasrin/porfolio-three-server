@@ -3,23 +3,23 @@ import validateRequest from "../../middlewares/validateRequest";
 
 const router = express.Router();
 
-// create user
-// router.post(
-//   "/signup",
-//   validateRequest(userValidationSchema),
-//   UserControllers.signUp
-// );
+// for creating Blog
+router.post(
+  "/",
+  validateRequest(BlogValidationSchema),
+  BlogControllers.createBlog
+);
 
-// // get all user
-// router.get("/", UserControllers.getAllUsers);
+//get all Blog
+router.get("/", BlogControllers.getAllBlogs);
 
-// // update user
-// router.patch(
-//   "/:userId",
-//   // authUser,
-//   // authAdmin,
+// get a single Blog
+router.get("/:experienceId", BlogControllers.getSingleBlog);
 
-//   UserControllers.updateUserRole
-// );
+//delete a single Blog
+router.delete("/:experienceId", BlogControllers.deleteSingleBlog);
+
+// update a single Blog
+router.put("/:experienceId", BlogControllers.updateSingleBlog);
 
 export const BlogRoutes = router;

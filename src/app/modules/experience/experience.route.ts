@@ -3,23 +3,23 @@ import validateRequest from "../../middlewares/validateRequest";
 
 const router = express.Router();
 
-// create user
-// router.post(
-//   "/signup",
-//   validateRequest(userValidationSchema),
-//   UserControllers.signUp
-// );
+// for creating Experience
+router.post(
+  "/",
+  validateRequest(ExperienceValidationSchema),
+  ExperienceControllers.createExperience
+);
 
-// // get all user
-// router.get("/", UserControllers.getAllUsers);
+//get all Experience
+// router.get("/", ExperienceControllers.getAllExperiences);
 
-// // update user
-// router.patch(
-//   "/:userId",
-//   // authUser,
-//   // authAdmin,
+// get a single Experience
+router.get("/:experienceId", ExperienceControllers.getSingleExperience);
 
-//   UserControllers.updateUserRole
-// );
+//delete a single Experience
+router.delete("/:experienceId", ExperienceControllers.deleteSingleExperience);
+
+// update a single Experience
+router.put("/:experienceId", ExperienceControllers.updateSingleExperience);
 
 export const ExperienceRoutes = router;

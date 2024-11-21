@@ -8,10 +8,6 @@ const router = Router();
 
 // set route
 const moduleRoutes = [
-  // {
-  //   path: "/auth",
-  //   route: AuthRoutes,
-  // },
   {
     path: "/experiences",
     route: ExperienceRoutes,
