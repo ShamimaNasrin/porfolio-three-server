@@ -9,10 +9,15 @@ const skillSchema = new Schema<TSkill>({
     unique: true,
     trim: true,
   },
-  icon: {
+  // icon: {
+  //   type: String,
+  //   required: [true, "Icon is required"],
+  //   trim: true,
+  // },
+  category: {
     type: String,
-    required: [true, "Icon is required"],
-    trim: true,
+    required: [true, "Category is required"],
+    enum: ["frontend", "backend", "tools"],
   },
   isDeleted: {
     type: Boolean,

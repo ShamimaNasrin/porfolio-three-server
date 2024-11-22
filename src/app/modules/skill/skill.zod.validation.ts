@@ -8,7 +8,8 @@ const skillValidationSchema = z.object({
       .min(1, "Name is required")
       .max(255, "Name cannot exceed 255 characters")
       .trim(),
-    icon: z.string().min(1, "Icon is required").url("Icon must be a valid URL"),
+    category: z.enum(["frontend", "backend", "tools"]),
+    // icon: z.string().min(1, "Icon is required").url("Icon must be a valid URL"),
     isDeleted: z.boolean().default(false),
   }),
 });
